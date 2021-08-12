@@ -11,6 +11,8 @@ import 'styles/css/nprogress.css';
 import Star from 'components/other/Star';
 import Footer from 'components/other/Footer';
 import Home from 'components/other/Home';
+import Nav from 'components/Nav';
+import { AuthProvider } from '../hooks/useAuth';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -25,7 +27,9 @@ function MyApp({ Component, pageProps, router }) {
 
       <GlobalStyle>
         {/* <Star /> */}
-        <Home />
+        {/* <AuthProvider>
+          <Nav />
+        </AuthProvider> */}
         <AnimatePresence exitBeforeEnter>
           <MotionBox
             key={router.route}
@@ -40,7 +44,9 @@ function MyApp({ Component, pageProps, router }) {
               exit: { opacity: 0, y: 10 },
             }}
           >
-            <Component {...pageProps} />
+            <AuthProvider>
+              <Component {...pageProps} />
+            </AuthProvider>
           </MotionBox>
         </AnimatePresence>
         <Footer />
